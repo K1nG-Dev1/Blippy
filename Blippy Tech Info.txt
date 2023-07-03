@@ -1,0 +1,13 @@
+Here's a detailed explanation of what the above Lua code will do:
+
+1. The code creates a namespace called `Blippy` to hold the addon's functionality.
+2. The `OnLoad` function is an event handler that registers the necessary events for the addon: `PLAYER_LOGIN`, `PLAYER_ENTERING_WORLD`, and `PLAYER_LEAVE_COMBAT`.
+3. The `OnPlayerLogin` function is called when the player logs in and serves as the initialization point for the addon. It loads the saved variables and performs any required addon initialization tasks.
+4. The `OnPlayerEnteringWorld` function is called when the player enters the world or changes zones. It checks if the player is in an instance using the `IsInInstance()` function. If the player is in an instance, it retrieves the player's name, the instance's name, and unique ID. It then stores this data along with the current local time as the enter time in the `Blippy.savedVariables` table.
+5. The `OnPlayerLeaveCombat` function is called when the player leaves combat. It checks if the player is no longer in an instance using the `IsInInstance()` function. If the player is not in an instance, it retrieves the last recorded instance data from `Blippy.savedVariables`. It checks if the `ExitTime` is already recorded (to prevent duplicate saving), and if not, updates it with the current local time.
+6. The `LoadSavedVariables` function is responsible for loading the saved variables from the `BlippySavedVariables` global variable. If the variable exists, it assigns it to `Blippy.savedVariables`. If the variable doesn't exist, it initializes `Blippy.savedVariables` as an empty table.
+7. The `SaveVariables` function is responsible for saving the variables by assigning the `Blippy.savedVariables` table to the `BlippySavedVariables` global variable.
+8. The event handlers and event frame registration ensure that the appropriate functions are called when the corresponding events occur.
+
+Overall, this code sets up the addon to track and store instance-related data, such as the character name, instance name, unique ID, enter time, and exit time (when applicable).
+The saved variables are stored in the `BlippySavedVariables` global variable and can be accessed and manipulated as needed.
